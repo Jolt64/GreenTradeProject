@@ -1,0 +1,1 @@
+select DISTINCT ON(pc_item_category) pc_item_category from points_category
