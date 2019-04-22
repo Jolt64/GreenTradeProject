@@ -22,14 +22,14 @@ class ItemsList extends Component {
     let showingItemsArr = this.props.itemsReducer.listItemsArr.map((item, i) => {
       return (
         <Link to={`/item/${item.li_id}`} key={i} >
-          <div>
+          <div className="listItem wrapper">
             <div>
-              <img src={item.it_img } alt={item.li_description} width="200px" ></img>
+              <img src={item.it_img } alt={item.li_description} width="150px" className="itemsListPic" ></img>
             </div>
             <div>
               <p>{item.li_description}</p>
-              <p>{item.li_timestamp}</p>
-              <p>{item.li_points}</p>
+              <p>Points {item.pc_points_per_action}</p>
+              <p className="timestamp">{item.li_timestamp}</p>
             </div>
           </div>
         </Link>

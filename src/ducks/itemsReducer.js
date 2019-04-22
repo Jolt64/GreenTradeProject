@@ -10,6 +10,7 @@ const GET_ITEMS_LIST = 'GET_ITEMS_LIST';
 const GET_CATEGORYS = 'GET_CATEGORYS';
 const GET_CATEGORY_POINTS = 'GET_CATEGORY_POINTS';
 const CREATE_NEW_ITEM_POST = 'CREATE_NEW_ITEM_POST';
+const GET_USER_ITEMS_LIST = 'GET_USER_ITEMS_LIST';
 
 
 export function getItemsList() {
@@ -40,6 +41,14 @@ export function createNewItem(itemInfo) {
     let data = Axios.post('/create-new-item-post', itemInfo).then(res => res.data)
     return {
         type: CREATE_NEW_ITEM_POST,
+        payload: data
+    }
+}
+
+export function getUsersItemsList(userID) {
+    let data = Axios.get(`/get-user-posted-items/${userID}`).then(res => res.data)
+    return {
+        type: GET_USER_ITEMS_LIST,
         payload: data
     }
 }
@@ -80,6 +89,15 @@ export default function reducer(state = initialState, action ) {
         case CREATE_NEW_ITEM_POST + '_FULFILLED':
             return {...state, listItemsArr: action.payload, loading: false}
         case CREATE_NEW_ITEM_POST + '_REJECTED':
+            console.log('rejected');
+            return {...state, loading: false}
+    
+    // Get users posted items
+        case GET_USER_ITEMS_LIST + '_PENDING':
+            return {...state, loading: true}
+        case GET_USER_ITEMS_LIST + '_FULFILLED':
+            return {...state, userListedItemsArr: action.payload, loading: false}
+        case GET_USER_ITEMS_LIST + '_REJECTED':
             console.log('rejected');
             return {...state, loading: false}
     

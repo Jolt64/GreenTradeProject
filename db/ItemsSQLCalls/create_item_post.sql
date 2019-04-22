@@ -20,4 +20,4 @@ insert into list_item (
     ${zip},
     ${userContact},
     ${timeStamp}
-)
+);

@@ -99,7 +99,14 @@ CREATE TABLE "img_table" (
   OIDS=FALSE
 );
 
-
+CREATE TABLE "contact_request" (
+	"cr_id" serial NOT NULL,
+	"cr_list_item" INT NOT NULL,
+	"cr_contacting_user" INT NOT NULL,
+	CONSTRAINT contact_request_pk PRIMARY KEY ("cr_id")
+) WITH (
+  OIDS=FALSE
+);
 
 
 
@@ -121,4 +128,6 @@ ALTER TABLE "finished_projects_list" ADD CONSTRAINT "finished_projects_list_fk2"
 
 ALTER TABLE "img_table" ADD CONSTRAINT "img_table_fk0" FOREIGN KEY ("it_user_id") REFERENCES "users"("user_id");
 
+ALTER TABLE "contact_request" ADD CONSTRAINT "contact_request_fk0" FOREIGN KEY ("cr_list_item") REFERENCES "list_item"("li_id");
+ALTER TABLE "contact_request" ADD CONSTRAINT "contact_request_fk1" FOREIGN KEY ("cr_contacting_user") REFERENCES "users"("user_id");
 

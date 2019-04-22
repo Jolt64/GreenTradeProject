@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import ItemsList from '../ItemsList/ItemsList';
 import { getUserData } from '../../ducks/userReducer';
+// import { getItemsList } from '../../ducks/itemsReducer';
 import { connect } from "react-redux";
 
 
@@ -8,7 +9,7 @@ class Home extends Component {
 
   componentDidMount() {
     this.props.getUserData();
-    
+    // this.props.getItemsList();
   }
 
   render() {

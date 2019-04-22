@@ -35,6 +35,7 @@ app.get('/getItems', itemsCT.getItems)
 app.get('/getcategorys', itemsCT.getItemsCategorys)
 app.put('/get-category-points', itemsCT.getItemsCategoryPoints)
 app.post('/create-new-item-post', itemsCT.createNewItemPost)
+app.get(`/get-user-posted-items/:id`, itemsCT.getUsersListedItems)
 
 // items array endpoints
 

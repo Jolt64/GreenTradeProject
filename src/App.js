@@ -14,6 +14,7 @@ import CreateUser from './components/CreateUser/CreateUser';
 import Login from './components/Login/Login';
 import DeleteUser from './components/DeleteUser/DeleteUser';
 import CreateItem from './components/CreateItem/CreateItem';
+import UserListedItems from './components/UserListedItems/UserListedItems';
 
 
 class App extends Component {
@@ -34,6 +35,7 @@ class App extends Component {
           <Route path="/login" component={Login}></Route>
           <Route path="/delete-user" component={DeleteUser}></Route>
           <Route path="/create-item" component={CreateItem}></Route>
+          <Route path="/user-listed-items" component={UserListedItems}></Route>
           <Route component={NotFound} />
         </Switch>
       </HashRouter>

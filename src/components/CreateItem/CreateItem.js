@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import Moment from 'moment'
-// import { Link } from "react-router-dom";
-import { getCategorys, getCategoryPoints, createNewItem } from "../../ducks/itemsReducer";
+import { Link } from "react-router-dom";
+import { getCategorys, getCategoryPoints, createNewItem, getItemsList } from "../../ducks/itemsReducer";
 import { getUserData } from '../../ducks/userReducer'
 
 class CreateItem extends Component {
@@ -75,7 +75,20 @@ class CreateItem extends Component {
       const { title, category, points, img, description, zip, userContact, timeStamp } = this.state
       console.log("userId", userId);
       
-      this.props.createNewItem({userId, title, category, points, img, description, zip, userContact, timeStamp});
+      this.props.createNewItem({
+        userId, 
+        title, 
+        category, 
+        points, 
+        img, 
+        description, 
+        zip, 
+        userContact, 
+        timeStamp
+      }).then(res => {
+        this.props.getItemsList()
+        this.props.history.push('/')
+      })
       this.setState({
         title: "",
         category: "",
@@ -108,8 +121,11 @@ class CreateItem extends Component {
       );
     }
     const { img, title, description, zip, userContact } = this.state;
-    return (
-      <div className="listItem wrapper">
+
+    let displayCreateItem = ""
+      if(this.props.userReducer.loggedIn){
+        displayCreateItem = (
+        <div className="wrapper">
         <select
           value={this.state.category}
           name="category"
@@ -120,6 +136,8 @@ class CreateItem extends Component {
         </select>
         {pointsDropdownHolder}
         <input
+          minlength="3" 
+          maxlength="20"
           type="text"
           name="title"
           value={title}
@@ -158,6 +176,19 @@ class CreateItem extends Component {
         <button onClick={() => this.postNewItem()}>Post Item</button>
 
       </div>
+        )
+    } else {
+      displayCreateItem = (
+        <div>
+          <h3>Pleast login to post Items</h3>
+          <Link to="/login"><button>Login Now</button></Link>
+        </div>
+      )
+    }
+    return (
+      <div>
+        {displayCreateItem}
+      </div>
     );
   }
 }
@@ -166,4 +197,4 @@ function mapStateToProps(state) {
   return state;
 }
 
-export default connect(mapStateToProps,{ getCategorys, getCategoryPoints, createNewItem, getUserData })(CreateItem);
+export default connect(mapStateToProps,{ getCategorys, getCategoryPoints, createNewItem, getUserData, getItemsList })(CreateItem);

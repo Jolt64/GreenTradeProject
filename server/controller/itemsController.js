@@ -29,5 +29,12 @@ module.exports = {
         let categoryHolder = pointsCategory[0].pc_id
         const categorys = await db.ItemsSQLCalls.create_item_post({userId, title, categoryHolder , imageIdHolder, description, zip, userContact, timeStamp});
         res.status(200).send(categorys)
+    },
+
+    getUsersListedItems: async (req, res) => {
+        const db = req.app.get('db');
+        const { id } = req.params
+        const items = await db.ItemsSQLCalls.get_users_listed_items(id);
+        res.status(200).send(items)
     }
 }
