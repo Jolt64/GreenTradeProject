@@ -1,6 +1,7 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
 import { connect } from "react-redux";
+import { deleteItem } from '../../ducks/itemsReducer'
 
 class Item extends Component {
   constructor(){
@@ -17,20 +18,28 @@ class Item extends Component {
     })
   }
 
+  deleteItem = () => {
+    const listArr = this.props.itemsReducer.listItemsArr
+    const index = listArr.findIndex(i => i.li_id === +this.props.match.params.id)
+    const { li_id } = this.props.itemsReducer.listItemsArr[index]
+    this.props.deleteItem(li_id)
+    this.props.history.goBack()
+  }
+
   render() {
     const listArr = this.props.itemsReducer.listItemsArr
     const index = listArr.findIndex(i => i.li_id === +this.props.match.params.id)
-    const { 
-      it_img, 
-      li_description, 
-      li_timestamp, 
-      pc_points_per_action, 
-      li_user_contact, 
-      li_zip, 
-      li_title, 
-      li_id,
-      li_user
-    } = listArr[index];
+      const { 
+        it_img, 
+        li_description, 
+        li_timestamp, 
+        pc_points_per_action, 
+        li_user_contact, 
+        li_zip, 
+        li_title, 
+        li_user
+      } = listArr[index];
+    
     
     let contactInfo = 'Please Login For Contact Info'
     let showDeleteButton = ''
@@ -41,7 +50,7 @@ class Item extends Component {
         contactRequestButton = li_user_contact
         showDeleteButton = (
           <div>
-            <button>Delete</button>
+            <button onClick={() => this.deleteItem()}>Delete</button>
           </div>
         )
       }
@@ -49,7 +58,7 @@ class Item extends Component {
     if(this.state.contactInfoShowing){
       contactRequestButton = (
         <div>
-          <p>{contactInfo}</p>
+          <p> Contact: {contactInfo}</p>
         </div>
       )
     }
@@ -62,11 +71,11 @@ class Item extends Component {
             <img src={it_img} alt={li_description} width="200px" />
           </div>
           <div>
-            <p>{li_description}</p>
-            <p>{li_timestamp}</p>
-            <p>{pc_points_per_action}</p>
+            <p>Description: {li_description}</p>
+            <p>Posted: {li_timestamp}</p>
+            <p>Points: {pc_points_per_action}</p>
             <p>{contactRequestButton}</p>
-            <p>{li_zip}</p>
+            <p>Zip Code: {li_zip}</p>
           </div>
         </div>
         {showDeleteButton}
@@ -82,4 +91,4 @@ function mapStateToProps(state) {
   return state;
 }
 
-export default connect(mapStateToProps)(Item);
+export default withRouter(connect(mapStateToProps, { deleteItem })(Item));

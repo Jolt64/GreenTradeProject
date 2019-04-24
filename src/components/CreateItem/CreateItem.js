@@ -3,13 +3,12 @@ import { connect } from "react-redux";
 import Moment from 'moment'
 import { Link } from "react-router-dom";
 import { getCategorys, getCategoryPoints, createNewItem, getItemsList } from "../../ducks/itemsReducer";
-import { getUserData } from '../../ducks/userReducer'
+import { getUserData } from '../../ducks/userReducer';
+import noImg from './no-image-icon-23492.png'
 
 class CreateItem extends Component {
   constructor(props) {
     super(props);
-    // const { user_id } = this.props.userReducer.userData;
-    // console.log(user_id);
 
 
     this.state = {
@@ -17,14 +16,17 @@ class CreateItem extends Component {
       userId: props.userReducer.userData.user_id,
       title: "",
       category: "",
-      points: 0,
-      img: "",
+      showingImg: "",
+      //this showingImg will be updated to reflect the showing img
+      points: "",
       description: "",
-      zip: 0,
+      zip: "",
       userContact: "",
       timeStamp: Moment().format("dddd, MMMM Do YYYY"),
-
-    // State for this component
+      
+      // State for this component
+      img: noImg,
+      //this img will reflect what is in the input field
       catHolder: [],
       pointsHolder: []
     };
@@ -63,6 +65,24 @@ class CreateItem extends Component {
     }
   }
 
+  // this resets the showingImg if the img is throwing a err
+  addDefaultSrc = (ev) => {
+    ev.target.src = noImg
+    this.setState({
+      showingImg: noImg
+    })
+  }
+
+  // this updates both the img and showingImg in state
+  imgHandler = e => {
+    const { value, name } = e.target;
+    this.setState({
+      [name]: value,
+      showingImg: value
+    });
+  };
+
+
   inputHandler = e => {
     const { value, name } = e.target;
     this.setState({
@@ -72,15 +92,14 @@ class CreateItem extends Component {
 
   postNewItem = () => {
       const userId = this.props.userReducer.userData.user_id
-      const { title, category, points, img, description, zip, userContact, timeStamp } = this.state
-      console.log("userId", userId);
+      const { title, category, points, showingImg, description, zip, userContact, timeStamp } = this.state
       
       this.props.createNewItem({
         userId, 
         title, 
         category, 
         points, 
-        img, 
+        showingImg, 
         description, 
         zip, 
         userContact, 
@@ -101,7 +120,6 @@ class CreateItem extends Component {
   }
 
   render() {
-    // console.log(this.state.userId);
     
     let pointsDropdownHolder = "";
     if (this.state.category === "") {
@@ -136,8 +154,8 @@ class CreateItem extends Component {
         </select>
         {pointsDropdownHolder}
         <input
-          minlength="3" 
-          maxlength="20"
+          minLength="3" 
+          maxLength="20"
           type="text"
           name="title"
           value={title}
@@ -149,14 +167,19 @@ class CreateItem extends Component {
           name="img"
           value={img}
           placeholder="Image"
-          onChange={e => this.inputHandler(e)}
+          onChange={e => this.imgHandler(e)}
+          onFocus={(e) => e.target.select()}
         />
-        <input
+        <textarea
+          rows="7"
+          minlength="3" 
+          maxlength="4000"
           type="text"
           name="description"
           value={description}
           placeholder="Description"
           onChange={e => this.inputHandler(e)}
+          onClick={(e) => e.target.select()}
         />
         <input
           type="number"
@@ -171,6 +194,7 @@ class CreateItem extends Component {
           value={userContact}
           placeholder="Contact information"
           onChange={e => this.inputHandler(e)}
+          onClick={(e) => e.target.select()}
         />
         <p>Contact Information will be displayed to users</p>
         <button onClick={() => this.postNewItem()}>Post Item</button>
@@ -179,14 +203,15 @@ class CreateItem extends Component {
         )
     } else {
       displayCreateItem = (
-        <div>
+        <div className="wrapper">
           <h3>Pleast login to post Items</h3>
           <Link to="/login"><button>Login Now</button></Link>
         </div>
       )
     }
     return (
-      <div>
+      <div className="wrapper">
+        <img onError={this.addDefaultSrc} src={this.state.img} alt="" className="itemsListPic" ></img>
         {displayCreateItem}
       </div>
     );

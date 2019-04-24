@@ -3,6 +3,10 @@ import Axios from "axios";
 
 const initialState = {
     listItemsArr: [],
+    userListedItemsArr: [],
+    itemsCategorys: "",
+    itemsCategoryPoints: "",
+    message: "",
     loading: false
 }
 
@@ -11,6 +15,7 @@ const GET_CATEGORYS = 'GET_CATEGORYS';
 const GET_CATEGORY_POINTS = 'GET_CATEGORY_POINTS';
 const CREATE_NEW_ITEM_POST = 'CREATE_NEW_ITEM_POST';
 const GET_USER_ITEMS_LIST = 'GET_USER_ITEMS_LIST';
+const DELETE_POSTED_ITEM = 'DELETE_POSTED_ITEM';
 
 
 export function getItemsList() {
@@ -49,6 +54,15 @@ export function getUsersItemsList(userID) {
     let data = Axios.get(`/get-user-posted-items/${userID}`).then(res => res.data)
     return {
         type: GET_USER_ITEMS_LIST,
+        payload: data
+    }
+}
+
+export function deleteItem(listItemId) {
+    let data = Axios.delete(`/delete-posted-item/${listItemId}`).then(res => res.data)
+
+    return {
+        type: DELETE_POSTED_ITEM,
         payload: data
     }
 }
@@ -101,9 +115,18 @@ export default function reducer(state = initialState, action ) {
             console.log('rejected');
             return {...state, loading: false}
     
+    // Delete posted items
+        case DELETE_POSTED_ITEM + '_PENDING':
+            return {...state, loading: true}
+        case DELETE_POSTED_ITEM + '_FULFILLED':
+            return {...state, message: action.payload, loading: false}
+        case DELETE_POSTED_ITEM + '_REJECTED':
+            console.log('rejected');
+            return {...state, loading: false}
+    
+
 
         default:
         return {...state, loading: false }
     }
 }
-

@@ -102,6 +102,7 @@ class CreateUser extends Component {
         <Link to="/">
           <button>Cancel</button>
         </Link>
+        <Link to="/delete-user"><button>Delete Account</button></Link>
       </div>
     );
   }

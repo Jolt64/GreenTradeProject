@@ -39,13 +39,13 @@ class User extends Component {
     const { user_id } = this.props.userReducer.userData
     this.props.getUsersItemsList(user_id).then(res => {
       this.props.history.push('/user-listed-items')
+      console.log(this.props);
     })
   }
 
 
   render() {
-    console.log(this.props.userReducer.userData);
-    
+    let points = 10
     let destructuringHolder = ""
     if(this.props.userReducer.loggedIn){
         destructuringHolder = this.props.userReducer.userData
@@ -62,9 +62,9 @@ class User extends Component {
           <p>Zip: {user_zip}</p>
           <button onClick={() => this.userItemsList()}>My Posted Items</button>
           <button onClick={() => this.logout()}>Logout</button>
-          <h3>Rep</h3>
+          <h3>My Points: {points}</h3>
+          <Link to="/"><button>Home</button></Link>
           <Link to="/create-user"><button>Update</button></Link>
-          <Link to="/delete-user"><button>Delete Account</button></Link>
       </div>
     )
   }

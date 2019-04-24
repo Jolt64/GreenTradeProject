@@ -2,6 +2,9 @@ import React, { Component } from 'react';
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { userLogin } from "../../ducks/userReducer";
+import { Button } from '../styledComponents';
+
+
 
 class Login extends Component {
   constructor(){
@@ -50,11 +53,11 @@ class Login extends Component {
           placeholder="Password"
           onChange={e => this.inputHandler(e)}
         />
-        <button onClick={() => this.loginHandler()}>Login</button>
+        <Button onClick={() => this.loginHandler()}>Login</Button>
         <p>Are you new to our site?</p>
         <p>Create a profile here</p> 
         <p>and start finding the things you need.</p>
-        <Link to="/create-user"><button>Create Profile</button></Link>
+        <Link to="/create-user"><Button>Create Profile</Button></Link>
       </div>
     )
   }

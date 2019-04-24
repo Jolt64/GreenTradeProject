@@ -2,56 +2,76 @@
   box-sizing: border-box;
 }
 
+@import url('https://fonts.googleapis.com/css?family=Gloria+Hallelujah|Orbitron:500');
+
+i{
+  font-size: 30px;
+}
+
 h1 {
   height: 50px;
   font-size: 40px;
   font-weight: 900;
+  background-color: #cfcfcf
 }
 
 h2 {
   height: 40px;
   font-size: 30px;
   font-weight: 800;
+  background-color: #cfcfcf
 }
 
 h3 {
   height: 30px;
   font-size: 25px;
   font-weight: 700;
-  
+  background-color: #cfcfcf
 }
 
 p {
   height: 25px;
   font-size: 18px;
+  background-color: #cfcfcf;
 }
 
 input{
   height: 26px;
+  width: 240px;
   font-size: 18px;
   margin: 2px;
-  border: solid black 1px;
+  border: solid #8d8c8c 1px;
+}
+
+textarea{
+  border: solid #8d8c8c 1px;
+  font-size: 18px;
+  margin: 2px;
+  width: 240px;
 }
 
 select{
   height: 26px;
   font-size: 18px;
   margin: 2px;
-  border: solid black 1px
+  border: solid #8d8c8c 1px
 }
 
 button{
-  height: 20px;
+  height: 28px;
   width: 150px;
-  font-size: 15px;
+  font-size: 18px;
   margin: 2px;
-  border: solid black 1px;
-  border-radius: 5px;
+  border: solid #8d8c8c 1px;
 }
 
 a{
   color: black;
   text-decoration-line: none;
+}
+
+::selection {
+  background: #E2F2E1;
 }
 
 .App {
@@ -64,20 +84,21 @@ a{
 	flex-wrap: nowrap;
 	justify-content: space-between;
   align-items: center;
-  
 }
 
 .nav{
   width: 100%;
   height: 50px;
   max-width:100%;
-  background-color: lightgray;
+  background-color: #E2F2E1;
   display: flex;
 	flex-direction: row;
 	flex-wrap: nowrap;
 	justify-content: space-between;
   align-items: center;
   padding: 0px 10px 0px 10px;
+  border-bottom: solid #8d8c8c 1px;
+  border-top: solid #8d8c8c 1px;
   
 }
 
@@ -90,7 +111,8 @@ a{
 }
 
 .login {
-
+ height: 100vh;
+ justify-content: flex-start;
 }
 
 .deleteUser{
@@ -99,8 +121,8 @@ a{
 
 .listItem{
   width: 340px;
-  border-bottom: solid black 1px;
-  border-top: solid black 1px;
+  border-bottom: solid #8d8c8c 1px;
+  border-top: solid #8d8c8c 1px;
   margin: 5px;
   background: #E2F2E1;
   display: flex;
@@ -121,5 +143,63 @@ a{
 
 .itemsListPic{
   margin: 2px 10px 2px 2px;
+  width: 150px;
+  height: 100px;
+}
+
+.mainLogo{
+  font-size: 25px;
+}
+
+.Trader{
+  font-family: 'Orbitron' , sans-serif;
+}
+
+.Green{
+  font-family: 'Gloria Hallelujah', cursive;
+}
+
+.hero {
+  width: 100%;
+  height: 100%;
+  min-width: 100%;
+  min-height: 100%;
+  position: relative;
+  }
+
+.hero::before {
+  min-height: 100vh;
+  background-image: url("https://images.pexels.com/photos/821642/pexels-photo-821642.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500");
+  background-size: cover;
+  background-position: center;
+  content: "";
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -2;
+  opacity: 0.2;
+}
+
+.separator{
+  width: 30%;
+  display: flex;
+	flex-direction: row;
+	flex-wrap: nowrap;
+	justify-content: center;
+	align-items: center;
+	align-content: center;
+}
+
+.builder{
+  width: 200px;
+  height: 100vh;
+  position: absolute;
+  background-color: red;
+  top: 50px;
+  right: 0px;
+  justify-content: start;
 }
 
