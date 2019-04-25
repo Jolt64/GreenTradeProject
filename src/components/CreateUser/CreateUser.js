@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { createUser, getUserData, updateUser } from "../../ducks/userReducer";
+import { Toast } from "toaster-js";
+
 
 class CreateUser extends Component {
   constructor(props) {
@@ -16,7 +18,7 @@ class CreateUser extends Component {
       user_email: user_email || "",
       password: "",
       user_zip: user_zip || "",
-      user_img: user_img || ""
+      user_img: user_img || "",
     };
   }
 
@@ -33,15 +35,24 @@ class CreateUser extends Component {
     });
   };
 
+  updateUser = () => {
+    let buttonFunction = this.props.createUser;
+    if(this.props.userReducer.loggedIn){
+      buttonFunction = this.props.updateUser;
+
+  }
+    buttonFunction(this.state)
+    .catch(err => new Toast(this.props.userReducer.message, Toast.TYPE_ERROR, Toast.TIME_NORMAL))
+  }
+
   render() {
+    console.log(this.props.userReducer.message);
+    
     let { user_firstName, user_lastName, user_userName, user_email, user_zip, user_img } = this.state
     
-    let buttonFunction = this.props.createUser;
     let buttonText = "Create";
     if(this.props.userReducer.loggedIn){
-        buttonFunction = this.props.updateUser;
         buttonText = "Update";
-
     }
     
     return (
@@ -96,7 +107,7 @@ class CreateUser extends Component {
           placeholder="Image"
           onChange={e => this.inputHandler(e)}
         />
-        <button onClick={() => buttonFunction(this.state)}>
+        <button onClick={() => this.updateUser() }>
           {buttonText}
         </button>
         <Link to="/">

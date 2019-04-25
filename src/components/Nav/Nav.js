@@ -7,21 +7,10 @@ import { getUsersItemsList } from '../../ducks/itemsReducer';
 
 import styled from 'styled-components';
 import SmallUserSvg from './iconmonstr-user-7.svg'
-import { Button, Trigger } from '../styledComponents';
+import { Button, MenuDiv } from '../styledComponents';
 
 
-const MenuDiv = styled.div`
-width: 160px;
-height: 500px;
-position: absolute;
-top: 50px;
-right: 0px;
-justify-content: start;
 
-&:click {
-  transform: translate(550, 50) 
-}
-`;
 
 const SmallUserImg = styled.img`
 width: 40px;
@@ -49,6 +38,7 @@ class Nav extends Component {
 
   userItemsList = () => {
     const { user_id } = this.props.userReducer.userData
+    this.setState({isMenuShowing: false})
     this.props.getUsersItemsList(user_id).then(res => {
       this.props.history.push('/user-listed-items')
       
@@ -76,7 +66,7 @@ class Nav extends Component {
 
     return (
         <div className="nav wrapper">
-          <MenuDiv className="wrapper">
+          <MenuDiv className={this.state.isMenuShowing ? "wrapper slideNavOpen" : "wrapper slideNavClosed"}>
           <Link onClick={() => this.setState({isMenuShowing: false})} to="/"><Button>Home</Button></Link>
           <Link onClick={() => this.setState({isMenuShowing: false})} to="/create-item">
             <Button>List Item</Button>
@@ -90,9 +80,9 @@ class Nav extends Component {
           <Link className="" to="/">
             <span className="mainLogo Trader"><span className="mainLogo Green">Green</span>Trader</span>
           </Link>
-          <Trigger>
-            <i onClick={() => this.setState({isMenuShowing: true})} class="fas fa-bars"></i>
-          </Trigger>
+          <div className="ham">
+            <i onClick={() => this.setState({isMenuShowing: !this.state.isMenuShowing})} class="fas fa-bars"></i>
+          </div>
         </div>
     );
   }

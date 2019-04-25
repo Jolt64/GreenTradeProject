@@ -56,7 +56,6 @@ export function userLogin(userInfo) {
 
 export function updateUser(UpdatedUserInfo) {    
     let data = Axios.put('/auth/update', UpdatedUserInfo).then(res => res.data)
-    console.log("hit", data);
     return {
         type: UPDATE_USER,
         payload: data
@@ -111,7 +110,7 @@ export default  function reducer(state = initialState, action) {
             return {...state,userData: {...action.payload}, loading: false, loggedIn: true }
         case UPDATE_USER + '_REJECTED':
             console.log('rejected')
-            return {...state, loading: false }
+            return {...state, message: action.payload.response.data.message , loading: false }
                 
         default:
             return state

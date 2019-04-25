@@ -15,7 +15,7 @@ class Home extends Component {
   render() {
     // console.log(this.props.userReducer.userData.user_id);
     return (
-      <div>
+      <div className="homeStartPosition">
         <ItemsList/>
       </div>
     )

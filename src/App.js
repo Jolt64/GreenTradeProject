@@ -24,9 +24,10 @@ class App extends Component {
 
   render() {
     return (
-      <HashRouter>
-        <div className="hero">
+      <HashRouter >
+        <div className="hero App">
         <Nav />
+        <div className="pageCon">
         <Switch>
           <Route path="/" exact component={Home} />
           <Route path="/user" component={User} />
@@ -47,6 +48,7 @@ class App extends Component {
           <Route path="/user-listed-items" component={UserListedItems} />
           <Route component={NotFound} />
         </Switch>
+            </div>
             </div>
       </HashRouter>
     );

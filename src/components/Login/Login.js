@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { userLogin } from "../../ducks/userReducer";
-import { Button } from '../styledComponents';
+import { Button, P, H3 } from '../styledComponents';
+
 
 
 
@@ -38,7 +39,7 @@ class Login extends Component {
   render() {
     return (
       <div className="login wrapper">
-          <h3>Login</h3>
+          <H3>Login</H3>
           <input
           type="text"
           name="email"
@@ -54,9 +55,9 @@ class Login extends Component {
           onChange={e => this.inputHandler(e)}
         />
         <Button onClick={() => this.loginHandler()}>Login</Button>
-        <p>Are you new to our site?</p>
-        <p>Create a profile here</p> 
-        <p>and start finding the things you need.</p>
+        <P>Are you new to our site?</P>
+        <P>Create a profile here</P> 
+        <P>and start finding the things you need.</P>
         <Link to="/create-user"><Button>Create Profile</Button></Link>
       </div>
     )

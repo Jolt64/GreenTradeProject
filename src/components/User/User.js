@@ -7,7 +7,8 @@ import {
   getUserData, 
   userLogout
  } from "../../ducks/userReducer";
-import { getUsersItemsList } from '../../ducks/itemsReducer'
+import { Button, P, H2, H3 } from '../styledComponents';
+
 
 
 class User extends Component {
@@ -56,15 +57,13 @@ class User extends Component {
     return (
       <div className="user wrapper">
         <img src={user_img} alt="user" width="200"></img>
-          <h2>{user_firstName}  {user_lastName}</h2>
-          <h3>As {user_userName}</h3>
-          <p>Email: {user_email}</p>
-          <p>Zip: {user_zip}</p>
-          <button onClick={() => this.userItemsList()}>My Posted Items</button>
-          <button onClick={() => this.logout()}>Logout</button>
-          <h3>My Points: {points}</h3>
-          <Link to="/"><button>Home</button></Link>
-          <Link to="/create-user"><button>Update</button></Link>
+          <H2>{user_firstName}  {user_lastName}</H2>
+          <H3>As: {user_userName}</H3>
+          <P>Email: {user_email}</P>
+          <P>Zip: {user_zip}</P>
+          <P>My Points: {points}</P>
+          <Button onClick={() => this.logout()}>Logout</Button>
+          <Link to="/create-user"><Button>Update</Button></Link>
       </div>
     )
   }
@@ -78,5 +77,4 @@ export default connect(mapStateToProps,{
   createUser, 
   getUserData, 
   userLogout, 
-  getUsersItemsList
  })(User)

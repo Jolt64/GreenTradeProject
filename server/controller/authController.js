@@ -65,7 +65,11 @@ module.exports = {
         const db = req.app.get('db');
         const user = await db.find_user_by_email(user_email);
         if(!user[0]){
-            return res.status(404).send({message: 'Must be logged in to update information'})
+            return res.status(404).send({message: 'Please enter email to update information'})
+        }
+        const result = bcrypt.compareSync(password, user[0].user_password)
+        if(!result){
+            return res.status(401).send({message: 'Incorrect password'})
         }
         const salt = bcrypt.genSaltSync(10);
         const hash = bcrypt.hashSync( password, salt);

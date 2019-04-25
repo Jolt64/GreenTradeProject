@@ -22,11 +22,11 @@ class ItemsList extends Component {
     let showingItemsArr = this.props.itemsReducer.listItemsArr.map((item, i) => {
       return (
         <Link to={`/item/${item.li_id}`} key={i} >
-          <div className="listItem wrapper">
+          <div className="listItem wrapper homeStartPosition">
             <div>
               <img src={item.it_img } alt={item.li_title} className="itemsListPic" ></img>
             </div>
-            <div>
+            <div className="descriptionContainer">
               <p>{item.li_title}</p>
               <p>Points {item.pc_points_per_action}</p>
               <p className="timestamp">{item.li_timestamp}</p>
@@ -35,8 +35,6 @@ class ItemsList extends Component {
         </Link>
       )
     })
-    // console.log(showingItemsArr);
-    // console.log(this.props.itemsReducer.listItemsArr[0]);
     
     return (
       <div className="wrapper">

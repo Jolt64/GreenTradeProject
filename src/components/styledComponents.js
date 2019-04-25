@@ -2,18 +2,37 @@ import styled from 'styled-components';
 
 export const Button = styled.button`
 color: black;
-background-color: #E2F2E1;
+background-color: #CFCFCF;
+box-shadow: inset 0 0 7px 5px #E2F2E1;
 `;
 
-export const Trigger = styled.div`
-transition: transform 300ms ease-in-out;
+export const MenuDiv = styled.div`
+width: 160px;
+position: absolute;
+top: 60px;
+justify-content: start;
 `;
 
-// export const MenueDiv = styled.div`
-// width: 160px;
-// height: 100vh;
-// position: absolute;
-// top: 50px;
-// right: 0px;
-// justify-content: start;
-// `;
+export const P = styled.p`
+min-height: 25px;
+font-size: 20px;
+font-weight: 600;
+background-color: rgb(207, 207, 207, 0.6);
+overflow: auto;
+`;
+
+export const H2 = styled.h2`
+height: 40px;
+font-size: 30px;
+font-weight: 800;
+background-color: rgb(207, 207, 207, 0.6);
+
+`;
+
+export const H3 = styled.h3`
+height: 30px;
+font-size: 25px;
+font-weight: 700;
+background-color: rgb(207, 207, 207, 0.6);
+
+`;

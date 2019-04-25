@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import { Link, withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import { deleteItem } from '../../ducks/itemsReducer'
+import { Button, P} from '../styledComponents';
+
 
 class Item extends Component {
   constructor(){
@@ -43,14 +45,14 @@ class Item extends Component {
     
     let contactInfo = 'Please Login For Contact Info'
     let showDeleteButton = ''
-    let contactRequestButton = <button onClick={() => this.contactInfoRequest()}>Show Contact Info</button>
+    let contactRequestButton = <Button onClick={() => this.contactInfoRequest()}>Contact Info</Button>
     if(this.props.userReducer.loggedIn){
       contactInfo = li_user_contact
       if(this.props.userReducer.userData.user_id === li_user ){
         contactRequestButton = li_user_contact
         showDeleteButton = (
           <div>
-            <button onClick={() => this.deleteItem()}>Delete</button>
+            <Button onClick={() => this.deleteItem()}>Delete</Button>
           </div>
         )
       }
@@ -71,16 +73,16 @@ class Item extends Component {
             <img src={it_img} alt={li_description} width="200px" />
           </div>
           <div>
-            <p>Description: {li_description}</p>
-            <p>Posted: {li_timestamp}</p>
-            <p>Points: {pc_points_per_action}</p>
-            <p>{contactRequestButton}</p>
-            <p>Zip Code: {li_zip}</p>
+            <P>Description: {li_description}</P>
+            <P>Posted: {li_timestamp}</P>
+            <P>Points: {pc_points_per_action}</P>
+            <P>Zip Code: {li_zip}</P>
+            <P>{contactRequestButton}</P>
           </div>
         </div>
         {showDeleteButton}
         <Link to="/">
-          <button>Home</button>
+          <Button>Home</Button>
         </Link>
       </div>
     );

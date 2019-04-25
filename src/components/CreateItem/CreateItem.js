@@ -22,7 +22,7 @@ class CreateItem extends Component {
       description: "",
       zip: "",
       userContact: "",
-      timeStamp: Moment().format("dddd, MMMM Do YYYY"),
+      timeStamp: Moment().format("ddd, MMMM Do YYYY"),
       
       // State for this component
       img: noImg,
@@ -210,7 +210,7 @@ class CreateItem extends Component {
       )
     }
     return (
-      <div className="wrapper">
+      <div className="wrapper listItemPage">
         <img onError={this.addDefaultSrc} src={this.state.img} alt="" className="itemsListPic" ></img>
         {displayCreateItem}
       </div>
