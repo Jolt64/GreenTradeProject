@@ -4,7 +4,6 @@ const massive = require('massive');
 const session = require('express-session')
 const authCT = require('./controller/authController')
 const itemsCT = require('./controller/itemsController')
-const path = require('path');
 
 const app = express()
 const { SERVER_PORT, SESSION_SECRET, CONNECTION_STRING } = process.env;
@@ -24,10 +23,6 @@ app.use(session({
         maxAge: 1000*60*60*24*3
     }
 }))
-
-app.get('*', (req, res)=>{
-    res.sendFile(path.join(__dirname, '../build/index.html'));
-});
 
 // User account endpoints
 app.post('/auth/register', authCT.register);

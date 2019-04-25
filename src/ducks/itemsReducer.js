@@ -4,7 +4,7 @@ import Axios from "axios";
 const initialState = {
     listItemsArr: [],
     userListedItemsArr: [],
-    itemsCategorys: "",
+    itemsCategorys: [],
     itemsCategoryPoints: "",
     message: "",
     loading: false
