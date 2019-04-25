@@ -86,10 +86,10 @@ module.exports = {
 
 // Endpoints for testing
 
-    allUsers: async (req, res) => {
-        const db = req.app.get('db');
-        const users = await db.getAllUsers();
-        res.status(200).send(users)
+    // allUsers: async (req, res) => {
+    //     const db = req.app.get('db');
+    //     const users = await db.getAllUsers();
+    //     res.status(200).send(users)
         
-    },
+    // },
 }

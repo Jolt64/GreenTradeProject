@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import { withRouter } from "react-router";
 import { connect } from "react-redux";
-import { getUserData } from "../../ducks/userReducer";
+import { getUserData, userLogout } from "../../ducks/userReducer";
 import { getUsersItemsList } from '../../ducks/itemsReducer';
 
 import styled from 'styled-components';
@@ -45,15 +45,25 @@ class Nav extends Component {
     })
   }
 
+  logout = () => {
+    this.props.userLogout().then(res => {
+      this.setState({isMenuShowing: false})
+      this.props.history.push('/')
+    })
+  }
+
   render() {
-    console.log(this.state.isMenuShowing);
     // let resetHam = onClick={() => this.setState({isMenuShowing: false})}
     let loginHolder = () => {
       if (this.props.userReducer.loggedIn === true) {
         return (
-          <Link onClick={() => this.setState({isMenuShowing: false})} to="/user">
-            <Button>User</Button>
-          </Link>
+          <div>
+            <Link onClick={() => this.setState({isMenuShowing: false})} to="/user">
+             <Button>User</Button>
+            </Link>
+            <Button onClick={() => this.userItemsList()}>My Posted Items</Button>
+            <Button onClick={() => this.logout()}>Logout</Button>
+          </div>
         );
       } else {
         return (
@@ -72,7 +82,6 @@ class Nav extends Component {
             <Button>List Item</Button>
           </Link>
           {loginHolder()}
-          <Button onClick={() => this.userItemsList()}>My Posted Items</Button>
           </MenuDiv>
 
 
@@ -92,4 +101,4 @@ function mapStateToProps(state) {
   return state;
 }
 
-export default withRouter(connect(mapStateToProps,{ getUserData, getUsersItemsList })(Nav));
+export default withRouter(connect(mapStateToProps,{ getUserData, getUsersItemsList, userLogout })(Nav));

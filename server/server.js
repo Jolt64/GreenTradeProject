@@ -4,6 +4,7 @@ const massive = require('massive');
 const session = require('express-session')
 const authCT = require('./controller/authController')
 const itemsCT = require('./controller/itemsController')
+const path = require('path');
 
 const app = express()
 const { SERVER_PORT, SESSION_SECRET, CONNECTION_STRING } = process.env;
@@ -13,6 +14,7 @@ massive(CONNECTION_STRING).then(db => {
     app.listen(SERVER_PORT, console.log(`${SERVER_PORT} bugs in the code`))
 })
 
+app.use( express.static( `${__dirname}/../build` ) );
 app.use(express.json())
 app.use(session({
     secret: SESSION_SECRET,
@@ -22,6 +24,10 @@ app.use(session({
         maxAge: 1000*60*60*24*3
     }
 }))
+
+app.get('*', (req, res)=>{
+    res.sendFile(path.join(__dirname, '../build/index.html'));
+});
 
 // User account endpoints
 app.post('/auth/register', authCT.register);
@@ -42,4 +48,4 @@ app.delete(`/delete-posted-item/:id`, itemsCT.deletePostedItem)
 
 
 // Endpoints for testing
-app.get('/auth/allUsers', authCT.allUsers)
+// app.get('/auth/allUsers', authCT.allUsers)
