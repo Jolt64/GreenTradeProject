@@ -81,7 +81,7 @@ class Nav extends Component {
           <UserImg>
             <SmallUserImg className="fullScreenNavAdd" src={this.state.smallUserImg} alt="User" ></SmallUserImg>
           </UserImg>
-          <div></div>
+          <div className="fullScreenNavRemove" ></div>
           <Link className="" to="/">
             <span className="mainLogo Trader"><span className="mainLogo Green">Green</span>Trader</span>
           </Link>

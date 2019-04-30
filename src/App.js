@@ -25,10 +25,13 @@ class App extends Component {
 
   render() {
     let loadingAnimation = () => {
-      if(this.props.itemsReducer.loading === false){
+      if(this.props.itemsReducer.loading === true){
         return (
           <div className='loadingAnimationBackground wrapper'>
-            <div className='loadingAnimation'></div>
+          <div>
+            <div className='loadingAnimationLeaves'></div>
+            <div className='loadingAnimationStick'></div>
+          </div>
           </div>
         )
       }
