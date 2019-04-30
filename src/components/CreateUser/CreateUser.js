@@ -41,12 +41,18 @@ class CreateUser extends Component {
       buttonFunction = this.props.updateUser;
 
   }
-    buttonFunction(this.state)
-    .catch(err => new Toast(this.props.userReducer.message, Toast.TYPE_ERROR, Toast.TIME_NORMAL))
+    buttonFunction(this.state).then(res => {
+      new Toast(
+        this.props.userReducer.message, Toast.TYPE_DONE, Toast.TIME_NORMAL
+        )
+    })
+    .catch(err => new Toast(
+      this.props.userReducer.message, Toast.TYPE_ERROR, Toast.TIME_NORMAL
+      ))
   }
 
   render() {
-    console.log(this.props.userReducer.message);
+    console.log(this.props);
     
     let { user_firstName, user_lastName, user_userName, user_email, user_zip, user_img } = this.state
     

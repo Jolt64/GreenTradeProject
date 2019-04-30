@@ -28,7 +28,7 @@ module.exports = {
     userData: async (req, res) => {
         // console.log(req.session.userData, 'hit1');
 
-        if(req.session.userData) res.status(200).send(req.session.userData)
+        if(req.session.userData) res.status(200).send({userData: req.session.userData})
         else res.status(404).send({message: 'Please log in'})
     },
 
@@ -76,7 +76,7 @@ module.exports = {
         let updatedUser = await db.update_user([user_firstName, user_lastName, user_userName, user_email, hash, user_zip, user_img])
         req.session.userData = {...updatedUser[0]}
         res.status(200).send({
-            message: 'User created successfully',
+            message: 'User update successful',
             loggedIn: true,
             userData: req.session.userData
         })

@@ -38,6 +38,8 @@ app.put('/get-category-points', itemsCT.getItemsCategoryPoints)
 app.post('/create-new-item-post', itemsCT.createNewItemPost)
 app.get(`/get-user-posted-items/:id`, itemsCT.getUsersListedItems)
 app.delete(`/delete-posted-item/:id`, itemsCT.deletePostedItem)
+app.get(`/search-items-by-title`, itemsCT.searchByTitle)
+app.get(`/search-items-by-category`, itemsCT.searchByCategory)
 
 // items array endpoints
 

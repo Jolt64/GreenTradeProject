@@ -46,9 +46,11 @@ class User extends Component {
 
 
   render() {
+    console.log(this.props.userReducer);
+    
     let points = 10
-    let destructuringHolder = ""
-    if(this.props.userReducer.loggedIn){
+    let destructuringHolder = this.state
+    if(this.props.userReducer.loggedIn === true){
         destructuringHolder = this.props.userReducer.userData
     } else {
         destructuringHolder = this.state
@@ -58,7 +60,7 @@ class User extends Component {
       <div className="user wrapper">
         <img src={user_img} alt="user" width="200"></img>
           <H2>{user_firstName}  {user_lastName}</H2>
-          <H3>As: {user_userName}</H3>
+          <H3>Username: {user_userName}</H3>
           <P>Email: {user_email}</P>
           <P>Zip: {user_zip}</P>
           <P>My Points: {points}</P>

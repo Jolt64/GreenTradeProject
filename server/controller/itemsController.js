@@ -43,5 +43,19 @@ module.exports = {
         const { id } = req.params;
         await db.ItemsSQLCalls.delete_posted_item(id);
         res.status(200).send({message: "Item Has Been Deleted"})
+    },
+
+    searchByTitle: async (req, res) => {
+        const db = req.app.get('db');
+        const { searchStr } = req.query
+        const items = await db.ItemsSQLCalls.get_listed_items_by_title(searchStr);
+        res.status(200).send(items)
+    },
+
+    searchByCategory: async (req, res) => {
+        const db = req.app.get('db');
+        const { category } = req.query
+        const items = await db.ItemsSQLCalls.get_listed_items_by_category(category);
+        res.status(200).send(items)
     }
 }

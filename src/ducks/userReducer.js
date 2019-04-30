@@ -9,7 +9,8 @@ const initialState = {
         user_zip: "",
         user_img: ""
     },
-    loading: false
+    loading: false,
+    loggedIn: false
 }
 
 const GET_USER_DATA = 'GET_USER_DATA';
@@ -71,7 +72,7 @@ export default  function reducer(state = initialState, action) {
         case CREATE_USER + '_PENDING':
             return {...state, loading: true }
         case CREATE_USER + '_FULFILLED':
-            return {...state,userData: {...action.payload}, loading: false }
+            return {...state, ...action.payload, loading: false }
         case CREATE_USER + '_REJECTED':
             console.log('rejected')    
             return {...state, loading: false }
@@ -80,7 +81,7 @@ export default  function reducer(state = initialState, action) {
         case GET_USER_DATA + '_PENDING':
             return {...state, loading: true }
         case GET_USER_DATA + '_FULFILLED':
-            return {...state,userData: {...action.payload}, loading: false, loggedIn: true }
+            return {...state, ...action.payload, loading: false, loggedIn: true }
         case GET_USER_DATA + '_REJECTED':
             console.log('rejected')    
             return {...state, loading: false }
@@ -89,7 +90,7 @@ export default  function reducer(state = initialState, action) {
         case LOGOUT + '_PENDING':
             return {...state, loading: true }
         case LOGOUT + '_FULFILLED':
-            return {...state,userData: {...action.payload}, loading: false, loggedIn: false }
+            return {...state, ...action.payload, loading: false, loggedIn: false }
         case LOGOUT + '_REJECTED':
             console.log('rejected')
             return {...state, loading: false }
@@ -98,7 +99,7 @@ export default  function reducer(state = initialState, action) {
         case USER_LOGIN + '_PENDING':
             return {...state, loading: true }
         case USER_LOGIN + '_FULFILLED':
-            return {...state,userData: {...action.payload}, loading: false, loggedIn: true }
+            return {...state,...action.payload, loading: false }
         case USER_LOGIN + '_REJECTED':
             console.log('rejected')
             return {...state, loading: false }
@@ -107,7 +108,7 @@ export default  function reducer(state = initialState, action) {
         case UPDATE_USER + '_PENDING':
             return {...state, loading: true }
         case UPDATE_USER + '_FULFILLED':
-            return {...state,userData: {...action.payload}, loading: false, loggedIn: true }
+            return {...state, ...action.payload, loading: false}
         case UPDATE_USER + '_REJECTED':
             console.log('rejected')
             return {...state, message: action.payload.response.data.message , loading: false }

@@ -16,7 +16,7 @@ class CreateItem extends Component {
       userId: props.userReducer.userData.user_id,
       title: "",
       category: "",
-      showingImg: "",
+      showingImg: noImg,
       //this showingImg will be updated to reflect the showing img
       points: "",
       description: "",
@@ -25,7 +25,7 @@ class CreateItem extends Component {
       timeStamp: Moment().format("ddd, MMMM Do YYYY"),
       
       // State for this component
-      img: noImg,
+      img: '',
       //this img will reflect what is in the input field
       catHolder: [],
       pointsHolder: []
@@ -211,7 +211,7 @@ class CreateItem extends Component {
     }
     return (
       <div className="wrapper listItemPage">
-        <img onError={this.addDefaultSrc} src={this.state.img} alt="" className="itemsListPic" ></img>
+        <img onError={this.addDefaultSrc} src={this.state.showingImg} alt="" className="UserImg" ></img>
         {displayCreateItem}
       </div>
     );

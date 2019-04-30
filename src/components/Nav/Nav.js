@@ -4,18 +4,10 @@ import { withRouter } from "react-router";
 import { connect } from "react-redux";
 import { getUserData, userLogout } from "../../ducks/userReducer";
 import { getUsersItemsList } from '../../ducks/itemsReducer';
-
-import styled from 'styled-components';
 import SmallUserSvg from './iconmonstr-user-7.svg'
-import { Button, MenuDiv } from '../styledComponents';
+import { Button, MenuDiv, UserImg, SmallUserImg } from '../styledComponents';
 
 
-
-
-const SmallUserImg = styled.img`
-width: 40px;
-border-radius: 50px;
-`;
 
 class Nav extends Component {
   constructor(){
@@ -53,12 +45,12 @@ class Nav extends Component {
   }
 
   render() {
-    // let resetHam = onClick={() => this.setState({isMenuShowing: false})}
+   let resetHam = () => this.setState({isMenuShowing: !this.state.isMenuShowing})
     let loginHolder = () => {
       if (this.props.userReducer.loggedIn === true) {
         return (
           <div>
-            <Link onClick={() => this.setState({isMenuShowing: false})} to="/user">
+            <Link onClick={resetHam} to="/user">
              <Button>User</Button>
             </Link>
             <Button onClick={() => this.userItemsList()}>My Posted Items</Button>
@@ -67,7 +59,7 @@ class Nav extends Component {
         );
       } else {
         return (
-          <Link onClick={() => this.setState({isMenuShowing: false})} to="/login">
+          <Link onClick={resetHam} to="/login">
             <Button>Login</Button>
           </Link>
         );
@@ -75,22 +67,31 @@ class Nav extends Component {
     };
 
     return (
-        <div className="nav wrapper">
+        <div className="nav wrapper ">
           <MenuDiv className={this.state.isMenuShowing ? "wrapper slideNavOpen" : "wrapper slideNavClosed"}>
-          <Link onClick={() => this.setState({isMenuShowing: false})} to="/"><Button>Home</Button></Link>
-          <Link onClick={() => this.setState({isMenuShowing: false})} to="/create-item">
+          <Link onClick={resetHam} to="/"><Button>Home</Button></Link>
+          <Link onClick={resetHam} to="/create-item">
             <Button>List Item</Button>
           </Link>
           {loginHolder()}
+          <Link onClick={resetHam} to="/search"><Button className="fullScreenNavRemove">Search</Button></Link>
           </MenuDiv>
 
 
-          <SmallUserImg src={this.state.smallUserImg} alt="User" ></SmallUserImg>
+          <UserImg>
+            <SmallUserImg className="fullScreenNavAdd" src={this.state.smallUserImg} alt="User" ></SmallUserImg>
+          </UserImg>
+          <div></div>
           <Link className="" to="/">
             <span className="mainLogo Trader"><span className="mainLogo Green">Green</span>Trader</span>
           </Link>
-          <div className="ham">
-            <i onClick={() => this.setState({isMenuShowing: !this.state.isMenuShowing})} class="fas fa-bars"></i>
+          <div>
+            <div className="mobileRemove">
+              <p className="menuTag" onClick={resetHam}>Menu</p>
+            </div>
+          </div>
+          <div className="fullScreenNavRemove ham">
+            <i onClick={resetHam} className="fas fa-bars"></i>
           </div>
         </div>
     );

@@ -26,7 +26,6 @@ height: 40px;
 font-size: 30px;
 font-weight: 800;
 background-color: rgb(207, 207, 207, 0.6);
-
 `;
 
 export const H3 = styled.h3`
@@ -34,5 +33,17 @@ height: 30px;
 font-size: 25px;
 font-weight: 700;
 background-color: rgb(207, 207, 207, 0.6);
+`;
 
+export const UserImg = styled.div`
+width: 40px;
+height: 40px;
+border-radius: 50px;
+`;
+
+export const SmallUserImg = styled.img`
+width: 40px;
+height: 40px;
+border-radius: 50px;
+background-position: center;
 `;

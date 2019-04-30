@@ -14,6 +14,7 @@ import Login from "./components/Login/Login";
 import DeleteUser from "./components/DeleteUser/DeleteUser";
 import CreateItem from "./components/CreateItem/CreateItem";
 import UserListedItems from "./components/UserListedItems/UserListedItems";
+import Search from './components/Search/Search'
 
 
 class App extends Component {
@@ -23,8 +24,19 @@ class App extends Component {
   }
 
   render() {
+    let loadingAnimation = () => {
+      if(this.props.itemsReducer.loading === false){
+        return (
+          <div className='loadingAnimationBackground wrapper'>
+            <div className='loadingAnimation'></div>
+          </div>
+        )
+      }
+    }
+    // console.log(this.props.itemsReducer.loading)
     return (
       <HashRouter >
+        {loadingAnimation()}
         <div className="hero App">
         <Nav />
         <div className="pageCon">
@@ -46,6 +58,7 @@ class App extends Component {
           <Route path="/delete-user" component={DeleteUser} />
           <Route path="/create-item" component={CreateItem} />
           <Route path="/user-listed-items" component={UserListedItems} />
+          <Route path="/search" component={Search} />
           <Route component={NotFound} />
         </Switch>
             </div>
